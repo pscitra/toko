@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PS. Citra - Menjual berbagai kebutuhan produk unggas di Jln Pramuka, Pangkalan Bun.">
+  <title>PS. Citra | Kebutuhan Produk Unggas</title>
+  <style>
+    :root{
+      --green:#14532d;
+      --green2:#166534;
+      --light:#f0fdf4;
+      --lime:#84cc16;
+      --orange:#f59e0b;
+      --dark:#17251c;
+      --muted:#64748b;
+      --white:#fff;
+      --shadow:0 18px 50px rgba(20,83,45,.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,Arial,sans-serif;color:var(--dark);background:#fff;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(1120px,92%);margin:auto}
+    header{
+      position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);border-bottom:1px solid #e5e7eb
+    }
+    nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .logo{display:flex;align-items:center;gap:11px;font-weight:900;color:var(--green);font-size:1.25rem}
+    .logo-mark{width:42px;height:42px;border-radius:13px;background:var(--green);color:white;display:grid;place-items:center;font-size:21px}
+    .nav-links{display:flex;gap:27px;font-weight:600;color:#334155}
+    .nav-links a:hover{color:var(--green)}
+    .nav-cta,.btn-primary{
+      background:var(--green);color:white;padding:12px 19px;border-radius:999px;font-weight:800;
+      box-shadow:0 8px 20px rgba(20,83,45,.18)
+    }
+    .nav-cta:hover,.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+    .menu{display:none;border:0;background:none;font-size:28px;color:var(--green);cursor:pointer}
+
+    .hero{
+      min-height:650px;display:grid;align-items:center;
+      background:linear-gradient(110deg,rgba(6,40,20,.88),rgba(20,83,45,.58)),
+      url('https://i.imgur.com/3yIDTZT.jpeg') center/cover;
+      color:white;
+    }
+    .hero-content{padding:95px 0;max-width:720px}
+    .eyebrow{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:8px 14px;border-radius:999px;font-weight:700;margin-bottom:20px}
+    h1{font-size:clamp(3rem,7vw,5.7rem);line-height:.98;letter-spacing:-.055em;margin-bottom:16px}
+    .tagline{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:700;color:#dcfce7;margin-bottom:18px}
+    .hero p{font-size:1.05rem;max-width:650px;color:#ecfdf5}
+    .hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 21px;border-radius:999px;font-weight:800;transition:.2s}
+    .btn-white{background:white;color:var(--green)}
+    .btn-outline{border:1px solid rgba(255,255,255,.45);color:white;background:rgba(255,255,255,.08)}
+    .btn:hover{transform:translateY(-2px)}
+
+    section{padding:90px 0}
+    .section-head{text-align:center;max-width:720px;margin:0 auto 44px}
+    .section-head span{color:var(--green2);font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem}
+    .section-head h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:9px 0 13px}
+    .section-head p{color:var(--muted)}
+
+    .grid{display:grid;gap:20px}
+    .categories{grid-template-columns:repeat(3,1fr)}
+    .card{background:white;border:1px solid #e7eee9;border-radius:var(--radius);padding:27px;box-shadow:var(--shadow);transition:.25s}
+    .card:hover{transform:translateY(-6px)}
+    .icon{width:56px;height:56px;border-radius:17px;background:var(--light);display:grid;place-items:center;font-size:28px;margin-bottom:18px}
+    .card h3{font-size:1.2rem;margin-bottom:8px}
+    .card p{color:var(--muted);font-size:.96rem}
+    .category-card{cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;transition:.2s}
+    .category-card:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+    .category-card.selected{border:2px solid var(--green);background:#f0fdf4}
+    .category-card .category-hint{display:block;margin-top:14px;color:var(--green2);font-size:.88rem;font-weight:800}
+    .category-gallery{margin-top:34px;padding:28px;border:1px solid #e7eee9;border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
+    .gallery-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .gallery-heading h3{font-size:1.45rem;color:var(--green)}
+    .gallery-heading p{color:var(--muted);font-size:.95rem}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .gallery-placeholder{min-height:190px;border:1px dashed #b7c9bb;border-radius:16px;background:#f8fbf8;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted)}
+    .gallery-item{overflow:hidden;border:1px solid #e7eee9;border-radius:16px;background:#fff;box-shadow:0 8px 20px rgba(20,83,45,.08)}
+    .gallery-item a{display:block}
+    .gallery-item img{width:100%;height:230px;object-fit:contain;background:#f8fbf8}
+    .gallery-item figcaption{padding:12px 14px;font-weight:700;color:var(--green)}
+    .gallery-placeholder .placeholder-icon{font-size:2rem;margin-bottom:8px}
+    .gallery-placeholder strong{display:block;color:var(--green);margin-bottom:4px}
+    .light-section{background:#f8fbf8}
+
+    .products{grid-template-columns:repeat(3,1fr)}
+    .product{padding:0;overflow:hidden}
+    .product-img{height:210px;object-fit:cover;width:100%}
+    .product-body{padding:23px}
+    .product-label{display:inline-block;color:var(--green2);background:var(--light);padding:5px 10px;border-radius:999px;font-size:.75rem;font-weight:800;margin-bottom:10px}
+    .product-body h3{margin-bottom:8px}
+    .product-body p{margin-bottom:18px}
+    .small-btn{display:inline-block;background:var(--green);color:#fff;padding:10px 15px;border-radius:12px;font-weight:800;font-size:.9rem}
+
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .about-img{border-radius:30px;height:450px;object-fit:cover;box-shadow:var(--shadow)}
+    .about h2{font-size:clamp(2rem,4vw,3rem);line-height:1.08;margin:8px 0 18px}
+    .about p{color:var(--muted);margin-bottom:18px}
+    .checks{display:grid;gap:12px;margin-top:24px}
+    .check{display:flex;gap:10px;align-items:center;font-weight:700}
+    .check b{width:25px;height:25px;border-radius:50%;background:#dcfce7;color:var(--green);display:grid;place-items:center}
+
+    .services{grid-template-columns:repeat(4,1fr)}
+    .service{text-align:center}
+    .service .icon{margin:0 auto 18px}
+
+    .cta{
+      margin:0 auto;max-width:1000px;border-radius:30px;padding:55px;
+      background:linear-gradient(120deg,var(--green),#0f3d24);color:white;text-align:center;
+      box-shadow:var(--shadow)
+    }
+    .cta h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin-bottom:12px}
+    .cta p{color:#dcfce7;max-width:680px;margin:0 auto 25px}
+    .cta .btn{background:white;color:var(--green)}
+
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+    .contact-card{background:#f8fbf8;border-radius:var(--radius);padding:32px;border:1px solid #e7eee9}
+    .contact-item{display:flex;gap:15px;margin:20px 0}
+    .contact-icon{width:44px;height:44px;flex:none;border-radius:12px;background:white;display:grid;place-items:center}
+    .contact-item small{color:var(--muted);display:block}
+    .map{
+      min-height:100%;border-radius:var(--radius);background:
+      linear-gradient(135deg,rgba(20,83,45,.9),rgba(132,204,22,.55)),
+      url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80') center/cover;
+      display:grid;place-items:center;color:white;text-align:center;padding:30px
+    }
+
+    footer{background:#0b2114;color:#d7e8dc;padding:48px 0 25px}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+    footer h3,footer h4{color:white;margin-bottom:13px}
+    footer p{color:#a9c2b1}
+    .footer-links{display:grid;gap:8px;color:#b9cfbf}
+    .copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:35px;padding-top:20px;color:#8fac9a;font-size:.9rem;text-align:center}
+
+    .wa-float{
+      position:fixed;right:22px;bottom:22px;z-index:999;background:#25D366;color:white;
+      padding:13px 17px;border-radius:999px;font-weight:900;box-shadow:0 12px 30px rgba(0,0,0,.2)
+    }
+
+    @media(max-width:900px){
+      .nav-links{display:none;position:absolute;top:76px;left:0;right:0;background:white;padding:18px 5%;flex-direction:column;box-shadow:0 15px 30px rgba(0,0,0,.08)}
+      .nav-links.active{display:flex}.menu{display:block}.nav-cta{display:none}
+      .categories,.products,.gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .services{grid-template-columns:repeat(2,1fr)}
+      .about,.contact{grid-template-columns:1fr}
+      .about-img{height:350px}.map{min-height:300px}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:600px){
+      nav{height:68px}.nav-links{top:68px}
+      .hero{min-height:620px}.hero-content{padding:75px 0}
+      section{padding:65px 0}
+      .categories,.products,.services,.footer-grid,.gallery-grid{grid-template-columns:1fr}
+      .card{padding:22px}
+      .cta{padding:38px 22px}
+      .wa-float{right:14px;bottom:14px;font-size:.9rem}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#beranda"><span class="logo-mark">🐔</span> PS. CITRA</a>
+      <button class="menu" aria-label="Buka menu" onclick="toggleMenu()">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#beranda">Beranda</a>
+        <a href="#produk">Produk</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#tentang">Tentang Kami</a>
+        <a href="#kontak">Kontak</a>
+      </div>
+      <a class="nav-cta" href="https://wa.me/6281348008000" target="_blank" rel="noopener">WhatsApp Kami</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="beranda">
+    <div class="container">
+      <div class="hero-content">
+        <span class="eyebrow">🐔 Kebutuhan Peternakan Unggas</span>
+        <h1>PS. Citra</h1>
+        <div class="tagline">Menjual berbagai kebutuhan produk unggas</div>
+        <p>Menyediakan berbagai kebutuhan unggas mulai dari pakan, obat-obatan, vitamin, bibit unggas, perlengkapan kandang hingga pembuatan kandang rumahan.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-white" href="#produk">Lihat Produk</a>
+          <a class="btn btn-outline" href="https://wa.me/6281348008000?text=Halo%20PS.%20Citra%2C%20saya%20ingin%20bertanya%20tentang%20produk%20dan%20kebutuhan%20unggas." target="_blank" rel="noopener">Chat WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="produk">
+    <div class="container">
+      <div class="section-head">
+        <span>Kategori</span>
+        <h2>Berbagai Kebutuhan Unggas + Aneka Telor </h2>
+        <p>Temukan kebutuhan untuk pemeliharaan unggas rumahan maupun peternakan.</p>
+      </div>
+      <div class="grid categories">
+        <button type="button" class="card category-card" data-category="Pakan Unggas" aria-pressed="false"><span class="icon">🌾</span><h3>Pakan Unggas</h3><p>Berbagai kebutuhan makanan dan pakan untuk unggas.</p><span class="category-hint">Lihat produk →</span></button>
+        <button type="button" class="card category-card" data-category="Obat-obatan & Vitamin" aria-pressed="false"><span class="icon">💊</span><h3>Obat-obatan &amp; Vitamin</h3><p>Kebutuhan obat-obatan dan vitamin untuk pemeliharaan unggas.</p><span class="category-hint">Lihat produk →</span></button>
+        <button type="button" class="card category-card" data-category="Bibit Unggas" aria-pressed="false"><span class="icon">🐣</span><h3>Bibit Unggas</h3><p>Menyediakan berbagai jenis bibit unggas sesuai ketersediaan.</p><span class="category-hint">Lihat produk →</span></button>
+        <button type="button" class="card category-card" data-category="Perlengkapan dan Pembuatan Kandang" aria-pressed="false"><span class="icon">🏠</span><h3>Perlengkapan dan Pembuatan Kandang</h3><p>Perlengkapan kandang serta layanan pembuatan kandang rumahan.</p><span class="category-hint">Lihat galeri →</span></button>
+        <button type="button" class="card category-card" data-category="Kebutuhan Unggas Lainnya" aria-pressed="false"><span class="icon">🐔</span><h3>Kebutuhan Unggas Lainnya</h3><p>Berbagai kebutuhan lain untuk membantu pemeliharaan unggas.</p><span class="category-hint">Lihat produk →</span></button>
+        <button type="button" class="card category-card" data-category="Menjual Aneka Telor" aria-pressed="false"><span class="icon">🥚</span><h3>Menjual Aneka Telor</h3><p>Berbagai jenis telor, seperti telor ayam, bebek, ayam kampung, dan lainnya.</p><span class="category-hint">Lihat produk →</span></button>
+      </div>
+      <div class="category-gallery" id="categoryGallery" hidden aria-live="polite">
+        <div class="gallery-heading">
+          <div><h3 id="galleryTitle">Produk</h3><p id="galleryDescription">Pilih kategori untuk melihat produk.</p></div>
+          <button type="button" class="small-btn" id="closeGallery">Tutup</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="light-section">
+    <div class="container">
+      <div class="section-head">
+        <span>Produk</span>
+        <h2>Produk & Kebutuhan Unggulan</h2>
+        <p>Hubungi kami untuk mengetahui harga dan ketersediaan produk.</p>
+      </div>
+      <div class="grid products">
+        <article class="card product">
+          <img class="product-img" src="https://sulukway.github.io/LOGO/WebALI/Pakan%20U.png" alt="Pakan unggas">
+          <div class="product-body"><span class="product-label">PAKAN</span><h3>Pakan Unggas</h3><p>Kebutuhan pakan untuk berbagai jenis unggas.</p><a class="small-btn" href="https://wa.me/6281348008000?text=Halo%20PS.%20Citra%2C%20saya%20ingin%20bertanya%20tentang%20pakan%20unggas." target="_blank" rel="noopener">Tanya via WhatsApp</a></div>
+        </article>
+        <article class="card product">
+          <img class="product-img" src="https://sulukway.github.io/LOGO/WebALI/Perlengakapan%20K.png" alt="Perlengkapan peternakan">
+          <div class="product-body"><span class="product-label">PERLENGKAPAN</span><h3>Perlengkapan Kandang</h3><p>Berbagai perlengkapan untuk kebutuhan kandang.</p><a class="small-btn" href="https://wa.me/6281348008000?text=Halo%20PS.%20Citra%2C%20saya%20ingin%20bertanya%20tentang%20perlengkapan%20kandang." target="_blank" rel="noopener">Tanya via WhatsApp</a></div>
+        </article>
+        <article class="card product">
+          <img class="product-img" src="https://sulukway.github.io/LOGO/WebALI/Bibit%20U.png" alt="Ayam unggas">
+          <div class="product-body"><span class="product-label">BIBIT</span><h3>Bibit Unggas</h3><p>Berbagai pilihan bibit unggas sesuai ketersediaan.</p><a class="small-btn" href="https://wa.me/6281348008000?text=Halo%20PS.%20Citra%2C%20saya%20ingin%20bertanya%20tentang%20bibit%20unggas." target="_blank" rel="noopener">Tanya via WhatsApp</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <div class="container about">
+      <img class="about-img" src="https://sulukway.github.io/LOGO/WebALI/Peternakan%20U.png" alt="Peternakan unggas">
+      <div>
+        <span class="eyebrow" style="background:#dcfce7;color:#14532d;border:0">Tentang PS. Citra</span>
+        <h2>Partner kebutuhan unggas Anda</h2>
+        <p>PS. Citra hadir untuk membantu memenuhi berbagai kebutuhan produk unggas bagi masyarakat dan peternak di Pangkalan Bun dan sekitarnya.</p>
+        <p>Kami menyediakan berbagai kebutuhan mulai dari pakan, obat-obatan dan vitamin, bibit unggas, perlengkapan kandang hingga layanan pembuatan kandang rumahan.</p>
+        <div class="checks">
+          <div class="check"><b>✓</b> Berbagai kebutuhan unggas</div>
+          <div class="check"><b>✓</b> Melayani kebutuhan peternak rumahan</div>
+          <div class="check"><b>✓</b> Konsultasi kebutuhan unggas</div>
+          <div class="check"><b>✓</b> Layanan pembuatan kandang</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="light-section" id="layanan">
+    <div class="container">
+      <div class="section-head">
+        <span>Layanan</span>
+        <h2>Layanan PS. Citra</h2>
+        <p>Kami membantu menyediakan kebutuhan dan layanan pendukung peternakan unggas.</p>
+      </div>
+      <div class="grid services">
+        <article class="card service"><div class="icon">🌾</div><h3>Pakan & Nutrisi</h3><p>Penyediaan kebutuhan pakan dan nutrisi unggas.</p></article>
+        <article class="card service"><div class="icon">💊</div><h3>Obat & Vitamin</h3><p>Kebutuhan obat-obatan dan vitamin unggas.</p></article>
+        <article class="card service"><div class="icon">🐣</div><h3>Bibit Unggas</h3><p>Penyediaan bibit unggas sesuai ketersediaan.</p></article>
+        <article class="card service"><div class="icon">🔨</div><h3>Kandang Rumahan</h3><p>Pembuatan kandang unggas untuk kebutuhan rumahan.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta">
+        <h2>Butuh kebutuhan unggas?</h2>
+        <p>Silakan hubungi PS. Citra untuk informasi produk, harga, ketersediaan, dan layanan pembuatan kandang.</p>
+        <a class="btn" href="https://wa.me/6281348008000?text=Halo%20PS.%20Citra%2C%20saya%20ingin%20bertanya%20tentang%20kebutuhan%20unggas." target="_blank" rel="noopener">Chat WhatsApp Sekarang</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="container">
+      <div class="section-head">
+        <span>Kontak</span>
+        <h2>Hubungi PS. Citra</h2>
+        <p>Kami siap membantu kebutuhan produk unggas Anda.</p>
+      </div>
+      <div class="contact">
+        <div class="contact-card">
+          <div class="contact-item"><div class="contact-icon">📱</div><div><small>WhatsApp 1</small><strong>0813-4800-8000</strong></div></div>
+          <div class="contact-item"><div class="contact-icon">📱</div><div><small>WhatsApp 2</small><strong>0812-104080</strong></div></div>
+          <div class="contact-item"><div class="contact-icon">📍</div><div><small>Alamat</small><strong>Jln Pramuka - Pangkalan Bun</strong></div></div>
+          <a class="btn btn-primary" href="https://wa.me/6281348008000" target="_blank" rel="noopener">Hubungi via WhatsApp</a>
+        </div>
+        <div class="map" style="padding:0;overflow:hidden;position:relative;min-height:360px;">
+          <iframe
+            src="https://www.google.com/maps?q=https://maps.app.goo.gl/TH77VAxnsoypJtV46&output=embed"
+            width="100%" height="100%" style="border:0;min-height:360px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi PS. Citra - Jln Pramuka, Pangkalan Bun">
+          </iframe>
+          <a href="https://maps.app.goo.gl/TH77VAxnsoypJtV46" target="_blank" rel="noopener" style="position:absolute;left:16px;bottom:16px;background:#14532d;color:#fff;padding:10px 15px;border-radius:12px;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.2);">📍 Buka di Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a class="wa-float" href="https://wa.me/6281348008000?text=Halo%20PS.%20Citra%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener">💬 Chat PS. Citra</a>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><img src="https://img.jacreation.com/ib/MSlFbBLCyc.png" alt="Logo PS. Citra" style="width:150px;max-width:100%;height:auto;object-fit:contain;margin-bottom:16px"><h3>PS. Citra</h3><p>Menjual berbagai kebutuhan produk unggas.</p><p style="margin-top:10px">Jln Pramuka - Pangkalan Bun</p></div>
+      <div><h4>Navigasi</h4><div class="footer-links"><a href="#beranda">Beranda</a><a href="#produk">Produk</a><a href="#layanan">Layanan</a><a href="#tentang">Tentang Kami</a><a href="#kontak">Kontak</a></div></div>
+      <div><h4>WhatsApp</h4><div class="footer-links"><a href="https://wa.me/6281348008000">0813-4800-8000</a><a href="https://wa.me/62812104080">0812-104080</a></div></div>
+    </div>
+    <div class="copyright">© 2026 PS. Citra. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu(){
+    document.getElementById('navLinks').classList.toggle('active');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active'));
+  });
+
+  // Galeri kategori: tempat gambar produk bisa ditambahkan kemudian.
+  const categoryGallery = document.getElementById('categoryGallery');
+  const galleryTitle = document.getElementById('galleryTitle');
+  const galleryDescription = document.getElementById('galleryDescription');
+  const galleryGrid = document.getElementById('galleryGrid');
+  const categoryDescriptions = {
+    'Pakan Unggas': 'Galeri foto produk pakan unggas.',
+    'Obat-obatan & Vitamin': 'Galeri foto obat-obatan dan vitamin unggas.',
+    'Bibit Unggas': 'Galeri foto bibit unggas.',
+    'Perlengkapan dan Pembuatan Kandang': 'Galeri foto perlengkapan kandang serta hasil dan contoh pembuatan kandang rumahan.',
+    'Menjual Aneka Telor': 'Galeri aneka telor, termasuk telor ayam, bebek, ayam kampung, dan jenis lainnya.',
+    'Kebutuhan Unggas Lainnya': 'Galeri foto kebutuhan unggas lainnya.'
+  };
+  const categoryImages = {
+    'Pakan Unggas': [
+      'https://img.jacreation.com/ib/HYM8eqPFGg.png',
+      'https://img.jacreation.com/ib/37El2A5bnE.png',
+      'https://img.jacreation.com/ib/a1gUeGNgwB.png'
+    ],
+    'Obat-obatan & Vitamin': [
+      'https://kenaritaman.wordpress.com/wp-content/uploads/2013/07/jenis-obat.png',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBs_4AJ95fklfpgf_Z6p9rHBB7Cbix7-pOIzyClXNjyaA-aPL20_8OhIoU&s=10',
+      'https://www.medion.co.id/wp-content/uploads/2025/10/KT-6.webp'
+    ],
+    'Bibit Unggas': [
+      'https://i.pinimg.com/736x/66/64/ac/6664aca0aaceafe346151f7f57ecb38f.jpg',
+      'https://i.pinimg.com/1200x/9a/21/73/9a2173dfc8feb01e9f395df1bc61a403.jpg',
+      'https://i.pinimg.com/736x/1c/ea/05/1cea050647e93b3c1424abd3d5c40e8b.jpg'
+    ],
+    'Perlengkapan dan Pembuatan Kandang': [
+      'https://www.deheus.id/siteassets/news/article/jenis-kandang-ayam-petelur/dsc05309.jpg',
+      'https://i.imgur.com/DvqinYz.jpeg',
+      'https://i.imgur.com/OB1X4ZM.jpeg'
+    ],
+    'Kebutuhan Unggas Lainnya': [
+      'https://i.pinimg.com/736x/b3/2f/83/b32f8306a47ec403529d177c03a94bbc.jpg',
+      'https://i.imgur.com/dWUYPWT.jpeg',
+      'https://i.imgur.com/MbJtMSa.jpeg'
+    ],
+    'Menjual Aneka Telor': [
+      'https://i.imgur.com/509gDHW.jpeg',
+      'https://i.imgur.com/abZhu32.png',
+      'https://i.imgur.com/RNvOWqR.jpeg'
+    ]
+  };
+
+  document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const category = card.dataset.category;
+      document.querySelectorAll('.category-card').forEach(item => {
+        const selected = item === card;
+        item.classList.toggle('selected', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      galleryTitle.textContent = category;
+      galleryDescription.textContent = categoryDescriptions[category];
+      galleryGrid.replaceChildren();
+      const images = categoryImages[category] || [];
+      if (images.length) {
+        images.forEach((url, index) => {
+          const figure = document.createElement('figure');
+          figure.className = 'gallery-item';
+          const link = document.createElement('a');
+          link.href = url;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.setAttribute('aria-label', 'Buka gambar ' + category + ' ' + (index + 1) + ' di tab baru');
+          const img = document.createElement('img');
+          img.src = url;
+          img.alt = category + ' ' + (index + 1);
+          img.loading = 'lazy';
+          img.onerror = () => { img.alt = 'Gambar tidak dapat dimuat. Klik untuk membuka tautan asli.'; };
+          link.appendChild(img);
+          const caption = document.createElement('figcaption');
+          caption.textContent = category + ' ' + (index + 1);
+          figure.append(link, caption);
+          galleryGrid.appendChild(figure);
+        });
+      } else {
+        for (let i = 1; i <= 3; i++) {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'gallery-placeholder';
+          placeholder.innerHTML = '<div><div class="placeholder-icon">🖼️</div><strong>Foto ' +
+            category + ' ' + i + '</strong><span>Gambar produk akan ditambahkan di sini.</span></div>';
+          galleryGrid.appendChild(placeholder);
+        }
+      }
+      categoryGallery.hidden = false;
+      categoryGallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  document.getElementById('closeGallery').addEventListener('click', () => {
+    categoryGallery.hidden = true;
+    document.querySelectorAll('.category-card').forEach(item => {
+      item.classList.remove('selected');
+      item.setAttribute('aria-pressed', 'false');
+    });
+  });
+</script>
+</body>
+</html>
